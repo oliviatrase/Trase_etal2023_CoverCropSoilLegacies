@@ -27,10 +27,11 @@ packageVersion("ShortRead")
 library(Biostrings)
 packageVersion("Biostrings")
 library(data.table)
+
 #### ASSIGN PATH ####
 
 # CHANGE PATH to the directory containing the fastq files after unzipping.
-path <- "16Sfasta" 
+path <- "ITSfasta" 
 
 #### READ IN FILES ####
 
@@ -50,7 +51,7 @@ filtRs <- file.path(filt_path, paste0(sample.names, "_R_filt.fastq.gz"))
 
 # Filter forward and reverse reads
 # On Windows set multithread=FALSE
-out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(220,150),
+out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(200,200),
                      maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,
                      compress=TRUE, multithread=F) 
 
@@ -108,10 +109,10 @@ fin.ESV.names<-paste("ESV",sep = "",rep(1:ncol(seqtab.nochim)))
 colnames(seqtab.nochim)<-fin.ESV.names
 
 # Write ESV table to file
-write.table(seqtab.nochim, file="16S_ESV_Abund_Table.txt")
+write.table(seqtab.nochim, file="ITS_ESV_Abund_Table.txt")
 
 ## Add ESV names to Taxonomy table and then write to file ##
 taxa.mod<-cbind(fin.ESV.names,taxa)
 
 # write taxa tavle to txt file
-write.table(taxa.mod, file = "16S_ESV_Taxonomy.txt")
+write.table(taxa.mod, file = "ITS_ESV_Taxonomy.txt")
