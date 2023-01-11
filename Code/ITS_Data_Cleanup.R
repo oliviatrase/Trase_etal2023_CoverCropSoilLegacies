@@ -1,3 +1,5 @@
+#ITS_Data_Cleanup
+
 ### 1. Initial Setup ###
 
 ### Set the working directory; modify to your own ###
@@ -8,7 +10,7 @@ rm(list=ls())
 ### Install required libraries (only do this once) ###
 
 if (!require("BiocManager", quietly = TRUE))
-        install.packages("BiocManager")
+  install.packages("BiocManager")
 #BiocManager::install(version = "3.15")
 
 BiocManager::install(c("phyloseq", "Heatplus"))
@@ -38,45 +40,36 @@ library(plyr)
 library(data.table)
 
 ### Import Data ###
-taxon <- read.table("Data/ESV_Taxonomy.txt")#, sep="\t", header=T, row.names=1)
+taxon <- read.table("Data/ITS_ESV_Taxonomy.txt")#, sep="\t", header=T, row.names=1)
 rownames(taxon)<-taxon$fin.ESV.names
 taxon$fin.ESV.names<-NULL
 taxon<-taxon[!is.na(taxon$Phylum),] # remove taxa that are not defines at the Phylum level
 
-otus <- read.table("Data/ESV_Abund_Table.txt")
+otus <- read.table("Data/ITS_ESV_Abund_Table.txt")
 rownames(otus) <- sub('.+-(.+)', '\\1', rownames(otus))
 
 metadat <- read.csv("Data/Metadata.csv")
 metadat$SampleNumber<-as.character(metadat$SampleNumber)
 metadat<-metadat[order(metadat$SampleNumber),]
-metadat <- subset(metadat,Type=='16S')
+metadat <- subset(metadat,Type=='ITS')
 rownames(metadat)<-metadat$SampleNumber
-metadat_rownames<-c(108)
-metadat<-metadat[!(row.names(metadat) %in% metadat_rownames),]
+# metadat_rownames<-c(108)
+# metadat<-metadat[!(row.names(metadat) %in% metadat_rownames),]
 metadat<-subset(metadat,SoilType!="ConvFallow")
 
 ### Remove problematic taxa ###
+# none
 
-unclass <- subset(taxon, Phylum == "unclassified")
-mito <- subset(taxon, Family == "Mitochondria")
-arch <- subset(taxon, Kingdom == "Archaea")
-chloro <- subset(taxon, Class == "Chloroplast")
-
-un.1<-union(rownames(unclass),rownames(mito))
-un.2<-union(rownames(arch),un.1)
-un.3<-union(rownames(chloro),un.2)
-
-red.taxon <- taxon[-which(rownames(taxon) %in% un.3),]
-write.csv(red.taxon,file="Data/16S_ESV_Taxonomy_clean.csv")
+write.csv(taxon,file="Data/ITS_ESV_Taxonomy_clean.csv")
 
 ## Match ESV table with new taxonomy file ##
-otus.filt<-otus[,which(colnames(otus) %in% rownames(red.taxon))]
+otus.filt<-otus[,which(colnames(otus) %in% rownames(taxon))]
 
 ## Determine minimum available reads per sample ##
 min(rowSums(otus.filt))
 
 ## Cut samples with too few reads...cutoff here is up to you and depends on dataset ##
-n2 <- names(which(rowSums(otus.filt) > 6000))
+n2 <- names(which(rowSums(otus.filt) > 5000))
 otus.re<-otus.filt[which(rownames(otus.filt) %in% n2),]
 
 rr <- min(rowSums(otus.re))
@@ -85,12 +78,12 @@ rr <- min(rowSums(otus.re))
 ## set.seed ensures that "random" selection of sequences stays constant each time you run the script #
 
 set.seed(336)
-otus.r<-rrarefy(otus.re,rr)
+otus.r<-rrarefy(otus.re,5000)
 
 metadat.r<-metadat[match(row.names(otus.r), row.names(metadat)),]
 metadat.r<-metadat.r[complete.cases(metadat.r), ]
 otus.r2<-otus.r[match(row.names(metadat.r), row.names(otus.r)),]
 otus.r2<-otus.r2[complete.cases(otus.r2), ]
 
-write.csv(metadat.r, file = "Data/16S_metadata_clean.csv", row.names = FALSE)
-write.csv(otus.r2, file = "Data/16S_ESV_Abund_clean.csv", row.names = FALSE)
+write.csv(metadat.r, file = "Data/ITS_metadata_clean.csv", row.names = FALSE)
+write.csv(otus.r2, file = "Data/ITS_ESV_Abund_clean.csv", row.names = FALSE)
