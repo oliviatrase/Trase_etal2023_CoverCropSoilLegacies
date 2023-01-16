@@ -3,7 +3,7 @@ Olivia Trase, Terrence Bell, William King, Jared Ali
 
 Code: 20230112_Master.ipynb
 
-Data: Master.csv and Timepoint_Distances.csv
+Data: Master.csv, WCRdata.csv, and Timepoint_Distances.csv
 
 To determine differences in plant growth, larval survival, and larval weight gain between cover crop treatments, we performed an ANOVA using a fitted linear model and a subsequent post-hoc pairwise Nemenyi test which included our block variables (date planted and maize variety) at an alpha value of 0.05. Average weight of WCR larvae was log transformed to meet ANOVA assumptions of normally distributed residuals and homogeneity. Plant growth was assessed on non-herbivore damaged treatments to isolate the influence of cover crop alone. Larval development data, or percentage of larvae which had reached the 3rd instar, were non-normally distributed and semi-continuous so differences between cover crop treatments were assessed separately for each maize variety using Kruskal-Wallis tests. 
 To compare Bray-Curtis similarity from pre- to post-planting between treatments, we used Student’s t-test and ANOVA. 
