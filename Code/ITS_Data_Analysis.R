@@ -1,6 +1,8 @@
 ### Clear workspace ###
 rm(list=ls())
 
+### CHANGED
+
 ### Install required libraries (only do this once) ###
 
 if (!require("BiocManager", quietly = TRUE))
@@ -243,13 +245,11 @@ ggplot(data=phyl.ag.new,aes(x=Var2,y=value,fill=Var1))+
   theme(text = element_text(size=20),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black"))
 
-#### How presence of bacterial taxa affect corn growth/insect performance ####
+#### How presence of fungal taxa affect corn growth/insect performance ####
 # read in data, clean
 otherdf<- read.csv("Data/Master.csv")
 rownames(otherdf)<-otherdf$Sample
 otherdf$Sample<-NULL
-
-
 
 ### Mixed models for Plant Data ### 
 # Use first timepoint for plant data
