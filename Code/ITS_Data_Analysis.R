@@ -1,7 +1,7 @@
 ### Clear workspace ###
 rm(list=ls())
 
-### CHANGED
+### Set working directory to project location
 
 ### Install required libraries (only do this once) ###
 
