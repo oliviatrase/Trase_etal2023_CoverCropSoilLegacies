@@ -768,58 +768,58 @@ ggplot(allplotdata.short, aes(metric, taxa2, fill= diff,alpha=-pval)) +
         axis.ticks.y = element_blank(),axis.text.y = element_text(size=14,family="serif",face="italic"))
 
 
-# taxon_chyt <- subset(taxon,Phylum=='P_Chytridiomycota')
-# ESV_chyt_list<-row.names(taxon_chyt)
-# ESV_chyt <- ESV.perc2[ , names(ESV.perc2) %in% ESV_chyt_list]
-# ESV_chyt_all <- rowSums(ESV_chyt)
-# otherdf.t2$Chyt <- ESV_chyt_all
-# 
-# chyt.agg<-aggregate(Chyt~SoilType, data=otherdf.t2,
-#                     FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
-# otherdf.t2$Chyt_bi<-0
-# otherdf.t2$Chyt_bi[otherdf.t2$Chyt>0]<-1
-# 
-# chyt.agg2<-aggregate(WCR3rdInstar~Chyt_bi, data=otherdf.t2,
-#                     FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
-# 
-# ggplot(chyt.agg) +geom_bar( aes(x=SoilType, y=Chyt[,"mean"]), stat="identity", fill=c("coral3")) +
-#   geom_errorbar( aes(x=SoilType, ymin=Chyt[,"mean"]-Chyt[,"se"], ymax=Chyt[,"mean"]+Chyt[,"se"]), width=0.4, colour="black", size=0.8)+
-#   geom_text(aes(x=SoilType, y=Chyt[,"mean"]+Chyt[,"se"],label=Chyt[,"count"]), vjust=0) +
-#   ggtitle("% Chytridiomycota")+ylab("% Chytridiomycota")+
-#   theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-#         panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
-# 
-# ggplot(chyt.agg2) +geom_bar( aes(x=Chyt_bi, y=WCR3rdInstar[,"mean"]), stat="identity", fill=c("coral3")) +
-#   geom_errorbar( aes(x=Chyt_bi, ymin=WCR3rdInstar[,"mean"]-WCR3rdInstar[,"se"], ymax=WCR3rdInstar[,"mean"]+WCR3rdInstar[,"se"]), width=0.4, colour="black", size=0.8)+
-#   geom_text(aes(x=Chyt_bi, y=WCR3rdInstar[,"mean"]+WCR3rdInstar[,"se"],label=WCR3rdInstar[,"count"]), vjust=0) +
-#   ggtitle("% 3rd Instar +/- Chytridiomycota")+ylab("% 3rd Instar")+
-#   theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-#         panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
-# 
-# taxon_thel <- subset(taxon,Family=='F_Thelebolaceae')
-# ESV_thel_list<-row.names(taxon_thel)
-# ESV_thel <- ESV.perc2[ , names(ESV.perc2) %in% ESV_thel_list]
-# ESV_thel_all <- rowSums(ESV_thel)
-# otherdf.t2$Thel <- ESV_thel_all
-# 
-# thel.agg<-aggregate(Thel~SoilType, data=otherdf.t2,
-#                     FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
-# otherdf.t2$Thel_bi<-0
-# otherdf.t2$Thel_bi[otherdf.t2$Thel>0]<-1
-# 
-# thel.agg2<-aggregate(WCRWeightAvg~Thel_bi, data=otherdf.t2,
-#                      FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
-# 
-# ggplot(thel.agg) +geom_bar( aes(x=SoilType, y=Thel[,"mean"]), stat="identity", fill=c("coral3")) +
-#   geom_errorbar( aes(x=SoilType, ymin=Thel[,"mean"]-Thel[,"se"], ymax=Thel[,"mean"]+Thel[,"se"]), width=0.4, colour="black", size=0.8)+
-#   geom_text(aes(x=SoilType, y=Thel[,"mean"]+Thel[,"se"],label=Thel[,"count"]), vjust=0) +
-#   ggtitle("% Chytridiomycota")+ylab("% Chytridiomycota")+
-#   theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-#         panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
-# 
-# ggplot(thel.agg2) +geom_bar( aes(x=Thel_bi, y=WCRWeightAvg[,"mean"]), stat="identity", fill=c("coral3")) +
-#   geom_errorbar( aes(x=Thel_bi, ymin=WCRWeightAvg[,"mean"]-WCRWeightAvg[,"se"], ymax=WCRWeightAvg[,"mean"]+WCRWeightAvg[,"se"]), width=0.4, colour="black", size=0.8)+
-#   geom_text(aes(x=Thel_bi, y=WCRWeightAvg[,"mean"]+WCRWeightAvg[,"se"],label=WCRWeightAvg[,"count"]), vjust=0) +
-#   ggtitle("WCR weight +/- Chytridiomycota")+ylab("% 3rd Instar")+
-#   theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-#         panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
+taxon_chyt <- subset(taxon,Phylum=='P_Chytridiomycota')
+ESV_chyt_list<-row.names(taxon_chyt)
+ESV_chyt <- ESV.perc2[ , names(ESV.perc2) %in% ESV_chyt_list]
+ESV_chyt_all <- rowSums(ESV_chyt)
+otherdf.t2$Chyt <- ESV_chyt_all
+
+chyt.agg<-aggregate(Chyt~SoilType, data=otherdf.t2,
+                    FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
+otherdf.t2$Chyt_bi<-0
+otherdf.t2$Chyt_bi[otherdf.t2$Chyt>0]<-1
+
+chyt.agg2<-aggregate(WCR3rdInstar~Chyt_bi, data=otherdf.t2,
+                    FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
+
+ggplot(chyt.agg) +geom_bar( aes(x=SoilType, y=Chyt[,"mean"]), stat="identity", fill=c("coral3")) +
+  geom_errorbar( aes(x=SoilType, ymin=Chyt[,"mean"]-Chyt[,"se"], ymax=Chyt[,"mean"]+Chyt[,"se"]), width=0.4, colour="black", size=0.8)+
+  geom_text(aes(x=SoilType, y=Chyt[,"mean"]+Chyt[,"se"],label=Chyt[,"count"]), vjust=0) +
+  ggtitle("% Chytridiomycota")+ylab("% Chytridiomycota")+
+  theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
+
+ggplot(chyt.agg2) +geom_bar( aes(x=Chyt_bi, y=WCR3rdInstar[,"mean"]), stat="identity", fill=c("coral3")) +
+  geom_errorbar( aes(x=Chyt_bi, ymin=WCR3rdInstar[,"mean"]-WCR3rdInstar[,"se"], ymax=WCR3rdInstar[,"mean"]+WCR3rdInstar[,"se"]), width=0.4, colour="black", size=0.8)+
+  geom_text(aes(x=Chyt_bi, y=WCR3rdInstar[,"mean"]+WCR3rdInstar[,"se"],label=WCR3rdInstar[,"count"]), vjust=0) +
+  ggtitle("% 3rd Instar +/- Chytridiomycota")+ylab("% 3rd Instar")+
+  theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
+
+taxon_thel <- subset(taxon,Family=='F_Thelebolaceae')
+ESV_thel_list<-row.names(taxon_thel)
+ESV_thel <- ESV.perc2[ , names(ESV.perc2) %in% ESV_thel_list]
+ESV_thel_all <- rowSums(ESV_thel)
+otherdf.t2$Thel <- ESV_thel_all
+
+thel.agg<-aggregate(Thel~SoilType, data=otherdf.t2,
+                    FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
+otherdf.t2$Thel_bi<-0
+otherdf.t2$Thel_bi[otherdf.t2$Thel>0]<-1
+
+thel.agg2<-aggregate(WCRWeightAvg~Thel_bi, data=otherdf.t2,
+                     FUN = function(x) c(mean = mean(x),se = sd(x)/sqrt(length(x)), count=length(x)))
+
+ggplot(thel.agg) +geom_bar( aes(x=SoilType, y=Thel[,"mean"]), stat="identity", fill=c("coral3")) +
+  geom_errorbar( aes(x=SoilType, ymin=Thel[,"mean"]-Thel[,"se"], ymax=Thel[,"mean"]+Thel[,"se"]), width=0.4, colour="black", size=0.8)+
+  geom_text(aes(x=SoilType, y=Thel[,"mean"]+Thel[,"se"],label=Thel[,"count"]), vjust=0) +
+  ggtitle("% Chytridiomycota")+ylab("% Chytridiomycota")+
+  theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
+
+ggplot(thel.agg2) +geom_bar( aes(x=Thel_bi, y=WCRWeightAvg[,"mean"]), stat="identity", fill=c("coral3")) +
+  geom_errorbar( aes(x=Thel_bi, ymin=WCRWeightAvg[,"mean"]-WCRWeightAvg[,"se"], ymax=WCRWeightAvg[,"mean"]+WCRWeightAvg[,"se"]), width=0.4, colour="black", size=0.8)+
+  geom_text(aes(x=Thel_bi, y=WCRWeightAvg[,"mean"]+WCRWeightAvg[,"se"],label=WCRWeightAvg[,"count"]), vjust=0) +
+  ggtitle("WCR weight +/- Chytridiomycota")+ylab("% 3rd Instar")+
+  theme(text = element_text(size=12),panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(), axis.line = element_line(colour = "black"),axis.title.x=element_blank())
